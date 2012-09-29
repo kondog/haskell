@@ -21,9 +21,9 @@ import BowlingCalc
 -- Input: [[5,3],[7,2],[8,/],[X],[7,1],[9,-],[6,2],[X],[6,/],[8,-]]↲
 -- Output: 126↲
 
-test_bowlingCalc :: Int -> String
+-- test_bowlingCalc :: [[Int]] Int -> String
 test_bowlingCalc src dst
-    | bowlingCalc src == dst = "good."
+    | ( bowlingCalc src ) == dst = "good."
     | otherwise = "bad."
 
 main = do
