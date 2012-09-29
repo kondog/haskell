@@ -1,4 +1,5 @@
 import BowlingCalc
+import Test.HUnit
 
 -- ボーリングは、各プレイヤーが10回のフレームで投球をし、
 -- 倒したピンの数からスコアを計算します。第10フレーム以外
@@ -21,13 +22,18 @@ import BowlingCalc
 -- Input: [[5,3],[7,2],[8,/],[X],[7,1],[9,-],[6,2],[X],[6,/],[8,-]]↲
 -- Output: 126↲
 
--- test_bowlingCalc :: [[Int]] Int -> String
-test_bowlingCalc src dst
-    | ( bowlingCalc src ) == dst = "good."
-    | otherwise = "bad."
+-- test code.
+isEasiestPattern src dst
+    | ( bowlingCalc src ) == dst = True
+    | otherwise = False
 
-main = do
-        putStrLn $ test_bowlingCalc [[1,1],[1,1],[1,1],[1,1],[1,1],[1,1],[1,1],[1,1],[1,1],[1,1]] 20
+-- test cases.
+test1 = TestCase( assertBool "the easiest pattern" ( isEasiestPattern [[1,1],[1,1],[1,1],[1,1],[1,1],[1,1],[1,1],[1,1],[1,1],[1,1]] 20 ))
+test2 = TestCase( assertBool "the easiest pattern" ( not ( isEasiestPattern [[1,1],[1,1],[1,1],[1,1],[1,1],[1,1],[1,1],[1,1],[1,1],[1,1]] 21 )) )
 
+-- wrap up tests.
+tests = TestList [TestLabel "test1" test1, TestLabel "test2" test2]
 
+-- do test.
+main = runTestTT tests
 
