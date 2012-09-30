@@ -23,16 +23,42 @@ import Test.HUnit
 -- Output: 126↲
 
 -- test code.
-isEasiestPattern src dst
+isBowlingScoreRight src dst
     | ( bowlingCalc src ) == dst = True
     | otherwise = False
 
 -- test cases.
-test1 = TestCase( assertBool "the easiest pattern" ( isEasiestPattern [[1,1],[1,1],[1,1],[1,1],[1,1],[1,1],[1,1],[1,1],[1,1],[1,1]] 20 ))
-test2 = TestCase( assertBool "the easiest pattern" ( not ( isEasiestPattern [[1,1],[1,1],[1,1],[1,1],[1,1],[1,1],[1,1],[1,1],[1,1],[1,1]] 21 )) )
+test1 = TestCase( assertBool "the easiest pattern" 
+    ( isBowlingScoreRight 
+      [[1,1],[1,1],[1,1],[1,1],[1,1],[1,1],[1,1],[1,1],[1,1],[1,1]] 
+      20 )
+    )
+
+test2 = TestCase( assertBool "the easiest pattern" 
+    ( not ( isBowlingScoreRight 
+      [[1,1],[1,1],[1,1],[1,1],[1,1],[1,1],[1,1],[1,1],[1,1],[1,1]] 
+      21 )) 
+    )
+
+test3 = TestCase( assertBool "spare pattern"
+    ( isBowlingScoreRight 
+      [[5,5],[1,1],[1,1],[1,1],[1,1],[1,1],[1,1],[1,1],[1,1],[1,1]] 
+      ((10)+((1*2)+1)+(2*8)) )
+    )
+
+test4 = TestCase( assertBool "gutter pattern"
+    ( isBowlingScoreRight 
+      [[1,-],[1,1],[1,1],[1,1],[1,1],[1,1],[1,1],[1,1],[1,1],[1,1]] 
+      ((10)+((1*2)+1)+(2*8)) )
+    )
+
 
 -- wrap up tests.
-tests = TestList [TestLabel "test1" test1, TestLabel "test2" test2]
+tests = TestList [
+    TestLabel "test1" test1,
+    TestLabel "test2" test2,
+    TestLabel "test3" test3
+    ]
 
 -- do test.
 main = runTestTT tests
